@@ -1,7 +1,31 @@
 import ReactDOM from 'react-dom/client';
 
+import './main.css';
+
+import clsx from 'clsx';
+
 const isMajor = false;
 const balance = 100;
+
+// Create a function that dynamically returns the correct class
+
+// isChoosen ==> title-selected
+// isChoosen = false ==> title-failure
+
+// const pickStyle = () => {
+//   return isChoosen ? 'title-selected' : 'title-failure';
+// };
+
+// const pickStyle = () => (isChoosen ? 'title-selected' : 'title-failure');
+
+const isChoosen = false;
+
+const pickStyle = () =>
+  clsx({
+    title: true,
+    selected: isChoosen,
+    failure: !isChoosen,
+  });
 
 const jsx = (
   <div id='container'>
@@ -43,6 +67,8 @@ const jsx = (
     )}
 
     {balance >= 100 && <h3>Clique ici pour retirer ton argent</h3>}
+
+    <h1 className={pickStyle()}>Messi</h1>
   </div>
 );
 
