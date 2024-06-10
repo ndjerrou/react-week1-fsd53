@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom/client';
 
+import App from './App';
+
 import './main.css';
 
 import clsx from 'clsx';
@@ -72,6 +74,17 @@ const jsx = (
   </div>
 );
 
-ReactDOM.createRoot(document.getElementById('root')).render(jsx);
+ReactDOM.createRoot(document.getElementById('root')).render(
+  // send multiple types of props
+  <App
+    name='Nissim'
+    uneAutreProp='encore une autre'
+    age={32}
+    anArray={['un', 'deux', 'trois']}
+    aFunc={() => 'kikoo'}
+    aBool
+    anObj={{ aProp: 'aValue' }}
+  /> // App("une string", "encore une fois")
+);
 
 // JSX - Javascript XML
