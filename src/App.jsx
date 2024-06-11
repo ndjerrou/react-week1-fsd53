@@ -1,22 +1,7 @@
-import NavBar from './components/NavBar';
+import Counter from './components/Counter';
 
-const App = ({ name, aBool, anArray, age }) => {
-  return (
-    <div>
-      <NavBar name={name} />
-      <p>{name}</p>
-      <p>Age: {age}</p>
-      <p>Bool: {aBool}</p>
-
-      <ul>
-        {anArray.map(({ content, tag }) => (
-          <li key={content}>
-            {tag} - {content}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+const App = () => {
+  return <Counter />;
 };
 
 export default App;
