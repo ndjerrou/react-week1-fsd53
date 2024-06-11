@@ -1,7 +1,7 @@
-import Counter from './components/Counter';
+import GuestList from './components/GuestList';
 
 const App = () => {
-  return <Counter />;
+  return <GuestList />;
 };
 
 export default App;
