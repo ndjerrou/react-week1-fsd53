@@ -1,5 +1,5 @@
-const NavBar = props => {
-  return <p>Je suis une navbar créé par {props.name}</p>;
+const NavBar = ({ name }) => {
+  return <p>Je suis une navbar créé par {name}</p>;
 };
 
 export default NavBar;

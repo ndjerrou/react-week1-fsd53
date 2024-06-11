@@ -74,17 +74,23 @@ const jsx = (
   </div>
 );
 
+const myProps = {
+  name: 'Nissim',
+  uneAutreProp: 'encore une autre',
+  age: 32,
+  anArray: [
+    { tag: 'h1', content: 'Title h1' },
+    { tag: 'h2', content: 'title h2' },
+    { tag: 'h3', content: 'title h3' },
+  ],
+  aFunc() {
+    'kikoo';
+  },
+  aBool: true,
+  anObj: { aProp: 'aValue' },
+};
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // send multiple types of props
-  <App
-    name='Nissim'
-    uneAutreProp='encore une autre'
-    age={32}
-    anArray={['un', 'deux', 'trois']}
-    aFunc={() => 'kikoo'}
-    aBool
-    anObj={{ aProp: 'aValue' }}
-  /> // App("une string", "encore une fois")
+  <App {...myProps} />
 );
 
 // JSX - Javascript XML

@@ -1,15 +1,20 @@
 import NavBar from './components/NavBar';
 
-const App = props => {
-  // ??
-  console.log(props);
-
+const App = ({ name, aBool, anArray, age }) => {
   return (
     <div>
-      <NavBar name={props.name} />
-      <p>{props.name}</p>
-      <p>Age: {props.age}</p>
-      <p>Bool: {props.aBool}</p>
+      <NavBar name={name} />
+      <p>{name}</p>
+      <p>Age: {age}</p>
+      <p>Bool: {aBool}</p>
+
+      <ul>
+        {anArray.map(({ content, tag }) => (
+          <li key={content}>
+            {tag} - {content}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
