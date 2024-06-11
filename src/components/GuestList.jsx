@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 
 import clsx from 'clsx';
+import { toast } from 'sonner';
+import { TiDelete } from 'react-icons/ti';
 
 import './GuestList.css';
-
-import { toast } from 'sonner';
 
 function GuestList() {
   const [name, setName] = useState('');
@@ -40,9 +40,13 @@ function GuestList() {
       <div>
         <ul>
           {guests.map((guest, idx) => (
-            <li className={printBgColor(idx)} key={guest + Math.random()}>
-              {guest}
-            </li>
+            <div
+              key={guest + Math.random()}
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <li className={printBgColor(idx)}>{guest}</li>
+              <TiDelete color='red' />
+            </div>
           ))}
         </ul>
       </div>
