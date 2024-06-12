@@ -72,6 +72,12 @@ function GuestList() {
               <TiDelete color='red' onClick={() => deleteGuest(guest)} />
             </div>
           ))}
+          {/* Exo */}
+          {/* Add a message\ */}
+          {/* No guests ==> "Aucun invité sur la liste" */}
+
+          {guests.length === 0 && <h5>Aucun invité sur la liste snif</h5>}
+          {/* {!guests.length && <h5>Aucun invité sur la liste snif</h5>} */}
         </ul>
       </div>
     </>
