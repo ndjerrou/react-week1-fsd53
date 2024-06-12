@@ -24,6 +24,30 @@ function GuestList() {
 
   const printBgColor = idx => clsx('name__item', idx % 2 && 'color');
 
+  const deleteGuest = guest => {
+    console.log('A supprimer : ', guest);
+
+    // const filteredGuests = guests.filter(el => el !== guest);
+
+    const filteredGuests = guests.filter(el => {
+      // lors du parcours de nos éléments
+
+      // SI el === guest à supprimer ==> pas de conservation dans l'output
+
+      // sinon oui
+
+      el === guest; // pas de conservation ==> return false
+
+      return el !== guest;
+    });
+
+    console.log('FilteredGuests = ', filteredGuests);
+
+    setGuests(filteredGuests);
+
+    toast.error('Invité supprimé !');
+  };
+
   return (
     <>
       <h1>Guests list</h1>
@@ -45,7 +69,7 @@ function GuestList() {
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <li className={printBgColor(idx)}>{guest}</li>
-              <TiDelete color='red' />
+              <TiDelete color='red' onClick={() => deleteGuest(guest)} />
             </div>
           ))}
         </ul>
