@@ -1,85 +1,44 @@
-import { useState, useRef } from 'react';
-
-import clsx from 'clsx';
-import { toast } from 'sonner';
-import { TiDelete } from 'react-icons/ti';
-
-import './GuestList.css';
+import { useState } from 'react';
+import Guest from './Guest';
+import GuestAdd from './GuestAdd';
+import GuestRemove from './GuestRemove';
+import GuestUpdate from './GuestUpdate';
 
 function GuestList() {
-  const [name, setName] = useState('');
-  const [guests, setGuests] = useState([]);
+  const [guests, setGuests] = useState(['Alex']);
+  const [isUpdate, setUpdate] = useState(false);
 
-  const inputRef = useRef(null);
-
-  const addGuest = () => {
+  const handleAddGuest = name => {
     setGuests(prevState => [...prevState, name]);
-
-    setName('');
-
-    inputRef.current.focus();
-
-    toast.success('Invité admis à la soirée');
   };
 
-  const printBgColor = idx => clsx('name__item', idx % 2 && 'color');
+  const removeGuest = guest => setGuests(guests.filter(el => el !== guest));
 
-  const deleteGuest = guest => {
-    console.log('A supprimer : ', guest);
-
-    // const filteredGuests = guests.filter(el => el !== guest);
-
-    const filteredGuests = guests.filter(el => {
-      // lors du parcours de nos éléments
-
-      // SI el === guest à supprimer ==> pas de conservation dans l'output
-
-      // sinon oui
-
-      el === guest; // pas de conservation ==> return false
-
-      return el !== guest;
-    });
-
-    console.log('FilteredGuests = ', filteredGuests);
-
-    setGuests(filteredGuests);
-
-    toast.error('Invité supprimé !');
-  };
+  const updateGuest = (name, idx) =>
+    setGuests(guests.map((guest, idxMap) => (idxMap === idx ? name : guest)));
 
   return (
     <>
-      <h1>Guests list</h1>
-      <label>Name : </label>
-      <input
-        ref={inputRef}
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />
-      <button onClick={addGuest} disabled={name.length <= 3}>
-        Add a guest
-      </button>
-
-      <div>
-        <ul>
-          {guests.map((guest, idx) => (
-            <div
-              key={guest + Math.random()}
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
-              <li className={printBgColor(idx)}>{guest}</li>
-              <TiDelete color='red' onClick={() => deleteGuest(guest)} />
-            </div>
-          ))}
-          {/* Exo */}
-          {/* Add a message\ */}
-          {/* No guests ==> "Aucun invité sur la liste" */}
-
-          {guests.length === 0 && <h5>Aucun invité sur la liste snif</h5>}
-          {/* {!guests.length && <h5>Aucun invité sur la liste snif</h5>} */}
-        </ul>
-      </div>
+      <GuestAdd onAddGuest={handleAddGuest} />
+      <ul>
+        {guests.map((guest, idx) => (
+          <div
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+            key={idx}
+          >
+            <Guest key={idx} name={guest} onClick={() => setUpdate(true)} />
+            <GuestRemove guest={guest} onRemove={removeGuest} />
+            {isUpdate && (
+              <GuestUpdate
+                onVisible={setUpdate}
+                guest={guest}
+                onUpdate={updateGuest}
+                idx={idx}
+              />
+            )}
+          </div>
+        ))}
+      </ul>
     </>
   );
 }
